@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/side-quest-only/static/css/main.2d0ea7dd.css",
+    "main.js": "/side-quest-only/static/js/main.e1614c34.js",
+    "static/js/453.8bcec57a.chunk.js": "/side-quest-only/static/js/453.8bcec57a.chunk.js",
+    "index.html": "/side-quest-only/index.html",
+    "main.2d0ea7dd.css.map": "/side-quest-only/static/css/main.2d0ea7dd.css.map",
+    "main.e1614c34.js.map": "/side-quest-only/static/js/main.e1614c34.js.map",
+    "453.8bcec57a.chunk.js.map": "/side-quest-only/static/js/453.8bcec57a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2d0ea7dd.css",
+    "static/js/main.e1614c34.js"
+  ]
+}
