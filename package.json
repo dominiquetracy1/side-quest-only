@@ -1,13 +1,12 @@
 {
   "name": "side-quest",
   "version": "0.1.0",
-  "homepage": "https://dominiquetracy1.github.io/side-quest-only",
+  "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
-    "canvas-confetti": "^1.9.4",
     "mapbox-gl": "^3.20.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
@@ -19,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
