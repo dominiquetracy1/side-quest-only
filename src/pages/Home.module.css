@@ -1,0 +1,244 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - var(--header-height));
+  text-align: center;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.streakBadge {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.rankText {
+  color: var(--accent-gold);
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.streakCount {
+  background-color: rgba(212, 175, 55, 0.1);
+  color: var(--accent-gold);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 800;
+  border: 1px solid var(--accent-gold);
+  letter-spacing: 1px;
+}
+
+.title {
+  font-size: clamp(3rem, 10vw, 5rem);
+  font-weight: 900;
+  color: var(--primary-forest);
+  margin-bottom: 0.5rem;
+  letter-spacing: -2px;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+  opacity: 0.75;
+}
+
+.displayArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 600px;
+  animation: expandIn 0.3s ease-out;
+}
+
+.loader {
+  font-weight: 800;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  animation: pulse 1.5s infinite;
+}
+
+.bountyPopup,
+.infoPopup {
+  position: relative;
+  background-color: var(--primary-forest);
+  color: var(--white);
+  padding: 2.5rem 2rem 2rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  border-left: 5px solid var(--accent-gold);
+  box-shadow: 0 10px 25px rgba(45, 71, 57, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.infoPopup h3 {
+  margin: 0;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.infoPopup p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.bountyContent {
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.bountyContent span {
+  color: var(--accent-gold);
+  font-weight: 900;
+  margin-right: 0.5rem;
+}
+
+.popupButtons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.completeBtn {
+  background-color: var(--accent-gold);
+  border: none;
+  color: var(--white);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: var(--transition-smooth);
+}
+
+.completeBtn:hover {
+  background-color: #c49a2a;
+  transform: scale(1.05);
+}
+
+.rerollBtn {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--white);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: var(--transition-smooth);
+}
+
+.rerollBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--white);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: var(--transition-smooth);
+}
+
+.closeBtn:hover {
+  opacity: 1;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  border: 2px solid var(--primary-forest);
+  letter-spacing: 1px;
+}
+
+.primaryButton {
+  background-color: var(--primary-forest);
+  color: var(--white);
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: var(--primary-forest);
+}
+
+.bounty {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.bounty:hover {
+  background-color: var(--accent-gold);
+  color: var(--white);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
