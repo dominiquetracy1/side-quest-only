@@ -1,0 +1,61 @@
+.mapWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #191a1a;
+  overflow: hidden;
+}
+
+.mapContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mapLoader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  text-align: center;
+  color: #d4af37;
+  font-weight: 900;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(212, 175, 55, 0.1);
+  border-left-color: #d4af37;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.backBtn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 60;
+  background-color: #d4af37;
+  border: none;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  font-size: 0.8rem;
+  font-weight: 900;
+  border-radius: 4px;
+  cursor: pointer;
+}

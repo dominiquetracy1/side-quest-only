@@ -1,0 +1,30 @@
+:root {
+  --primary-forest: #2d4739;
+  --accent-gold: #d4a373;
+  --bg-parchment: #fafaf5;
+  --text-main: #1f2937;
+  --white: #ffffff;
+
+  --radius-md: 12px;
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --header-height: 80px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", -apple-system, system-ui, sans-serif;
+  background-color: var(--bg-parchment);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
