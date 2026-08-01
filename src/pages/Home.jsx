@@ -38,7 +38,6 @@ const BOUNTIES = [
   "Spend an afternoon shopping and dining in Uptown Dallas along McKinney Avenue.",
   "Grab upscale drinks and dinner in the Harwood District.",
   "Play retro arcade games at Cidercade Dallas near the Design District.",
-  "Walk through the sculpture garden at the Nasher Sculpture Center.",
   "Catch an indie movie and drinks at the historic Inwood Theatre.",
   "Try out the restaurants and patio scene along Lower Greenville.",
   "Grab legendary brisket at Pecan Lodge in Deep Ellum.",
@@ -73,6 +72,9 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
+  // NEW: State for the welcome banner popup
+  const [showWelcomeBanner, setShowWelcomeBanner] = useState(false);
+
   useEffect(() => {
     const savedName = localStorage.getItem("questUserName");
     if (savedName) {
@@ -87,7 +89,9 @@ const Home = () => {
     const savedCompleted = localStorage.getItem("completedQuests");
     if (savedCompleted) {
       try {
-        setCompletedQuests(JSON.parse(savedCompleted));
+        const parsed = JSON.parse(savedCompleted);
+        const uniqueCompleted = [...new Set(parsed)];
+        setCompletedQuests(uniqueCompleted);
       } catch (e) {
         setCompletedQuests([]);
       }
@@ -102,6 +106,13 @@ const Home = () => {
     localStorage.setItem("questUserName", name);
     setUserName(name);
     setIsModalOpen(false);
+
+    // Trigger the welcome banner popup & confetti
+    setShowWelcomeBanner(true);
+    triggerConfetti();
+    setTimeout(() => {
+      setShowWelcomeBanner(false);
+    }, 4000);
 
     try {
       await fetch(
@@ -149,17 +160,23 @@ const Home = () => {
 
   const completeQuest = () => {
     if (!currentBounty) return;
-    triggerConfetti();
-    playCompleteSound();
 
-    const newCount = completedQuests.length + 1;
-    if (newCount === 5 || newCount === 10 || newCount === 15) {
-      playRankUpSound();
+    if (!completedQuests.includes(currentBounty)) {
+      triggerConfetti();
+      playCompleteSound();
+
+      const newCount = completedQuests.length + 1;
+      if (newCount === 5 || newCount === 10 || newCount === 15) {
+        playRankUpSound();
+      }
+
+      const updatedCompleted = [
+        ...new Set([...completedQuests, currentBounty]),
+      ];
+      setCompletedQuests(updatedCompleted);
+      localStorage.setItem("completedQuests", JSON.stringify(updatedCompleted));
     }
 
-    const updatedCompleted = [...completedQuests, currentBounty];
-    setCompletedQuests(updatedCompleted);
-    localStorage.setItem("completedQuests", JSON.stringify(updatedCompleted));
     setCurrentBounty("");
     localStorage.removeItem("activeSideQuest");
   };
@@ -169,8 +186,45 @@ const Home = () => {
     localStorage.removeItem("activeSideQuest");
   };
 
+  const clearCompletedHistory = () => {
+    setCompletedQuests([]);
+    localStorage.removeItem("completedQuests");
+  };
+
+  const handleStartOver = () => {
+    setCompletedQuests([]);
+    setCurrentBounty("");
+    localStorage.removeItem("completedQuests");
+    localStorage.removeItem("activeSideQuest");
+    setShowCompleted(false);
+  };
+
   return (
     <main className={styles.container}>
+      {/* NEW: Welcome Banner Pop-up after submission */}
+      {showWelcomeBanner && (
+        <div
+          style={{
+            position: "fixed",
+            top: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "#1c1c1c",
+            border: "1px solid #d4af37",
+            padding: "12px 24px",
+            borderRadius: "8px",
+            zIndex: 3000,
+            color: "#fff",
+            textAlign: "center",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
+          }}
+        >
+          <p style={{ margin: 0, fontWeight: "bold", color: "#d4af37" }}>
+            Welcome, {userName}! Let's find your next adventure.
+          </p>
+        </div>
+      )}
+
       {isModalOpen && (
         <div
           style={{
@@ -200,7 +254,7 @@ const Home = () => {
             }}
           >
             <h3 style={{ color: "#d4af37", marginBottom: "10px" }}>
-              CHOOSE YOUR ADVENTURE
+              READY FOR YOUR NEXT ADVENTURE?{" "}
             </h3>
             <p
               style={{
@@ -209,7 +263,7 @@ const Home = () => {
                 marginBottom: "15px",
               }}
             >
-              Enter your name to begin your adventure:
+              Enter your name to get started:
             </p>
             <input
               type="text"
@@ -232,7 +286,7 @@ const Home = () => {
             <button
               type="submit"
               style={{
-                width: "100%",
+                width: "50%",
                 padding: "10px",
                 background: "#d4af37",
                 color: "#000",
@@ -286,13 +340,36 @@ const Home = () => {
             {completedQuests.length === 0 ? (
               <p>No completed quests yet.</p>
             ) : (
-              <ul style={{ textAlign: "left", paddingLeft: "20px", margin: 0 }}>
-                {completedQuests.map((quest, index) => (
-                  <li key={index} style={{ marginBottom: "6px" }}>
-                    {quest}
-                  </li>
-                ))}
-              </ul>
+              <>
+                <ul
+                  style={{
+                    textAlign: "left",
+                    paddingLeft: "20px",
+                    margin: "0 0 15px 0",
+                  }}
+                >
+                  {completedQuests.map((quest, index) => (
+                    <li key={index} style={{ marginBottom: "6px" }}>
+                      {quest}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={clearCompletedHistory}
+                  style={{
+                    padding: "6px 12px",
+                    background: "#333",
+                    color: "#ff4d4d",
+                    border: "1px solid #ff4d4d",
+                    borderRadius: "4px",
+                    fontSize: "0.8rem",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Clear History
+                </button>
+              </>
             )}
           </div>
         </div>
