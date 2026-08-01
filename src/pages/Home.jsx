@@ -191,14 +191,6 @@ const Home = () => {
     localStorage.removeItem("completedQuests");
   };
 
-  const handleStartOver = () => {
-    setCompletedQuests([]);
-    setCurrentBounty("");
-    localStorage.removeItem("completedQuests");
-    localStorage.removeItem("activeSideQuest");
-    setShowCompleted(false);
-  };
-
   return (
     <main className={styles.container}>
       {/* NEW: Welcome Banner Pop-up after submission */}
