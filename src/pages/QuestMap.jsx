@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
 import styles from "./QuestMap.module.css";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
